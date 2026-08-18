@@ -59,6 +59,21 @@ Compatibility depends on how each website implements video playback and subtitle
 
 ---
 
+## Supported Platforms
+
+PiPCue has been tested with the following learning and video platforms:
+
+| Platform | Picture-in-Picture | Subtitles |
+| --- | --- | --- |
+| Udemy | ✅ Supported | ✅ Supported |
+| YouTube | ✅ Supported | ✅ Supported |
+| LinkedIn Learning | ✅ Supported | ✅ Supported |
+| Vimeo | ✅ Supported | ✅ Supported |
+| Coursera | ⚠️ Limited support | ⚠️ Embedded player restrictions |
+| edX | 🧪 Not yet tested | 🧪 Not yet tested |
+
+Platform compatibility may change when websites update their video players.
+
 ## How to Use PiPCue
 
 ### 1. Open a supported video
