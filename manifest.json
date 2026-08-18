@@ -1,0 +1,40 @@
+{
+  "manifest_version": 3,
+  "name": "PiPCue",
+  "version": "0.4.4",
+  "description": "Picture-in-Picture video with synchronized subtitles on popular video and learning sites.",
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_title": "PiPCue",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.udemy.com/course/*",
+        "https://*.udemy.com/course/*",
+        "https://www.youtube.com/*",
+        "https://m.youtube.com/*",
+        "https://www.linkedin.com/learning/*",
+        "https://www.edx.org/*",
+        "https://*.edx.org/*",
+        "https://vimeo.com/*",
+        "https://player.vimeo.com/*"
+      ],
+      "js": ["content.js"],
+      "css": ["styles.css"],
+      "run_at": "document_idle"
+    }
+  ]
+}

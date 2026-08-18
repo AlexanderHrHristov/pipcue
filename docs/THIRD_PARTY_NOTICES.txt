@@ -1,0 +1,50 @@
+PiPCue
+THIRD-PARTY SOFTWARE NOTICES
+
+Copyright © 2026 Alexander Hristov.
+All rights reserved.
+
+
+1. THIRD-PARTY SOFTWARE
+
+PiPCue is built primarily using standard web technologies and browser APIs.
+
+The current distribution of PiPCue does not intentionally bundle third-party
+JavaScript libraries, frameworks, or other software components that require
+separate attribution in this notice.
+
+
+2. BROWSER AND WEB PLATFORM APIs
+
+PiPCue uses browser functionality and APIs provided by Google Chrome and
+Chromium-based browsers.
+
+Use of these browser APIs does not imply affiliation with, sponsorship by,
+or endorsement from Google or the Chromium project.
+
+
+3. THIRD-PARTY WEBSITES AND SERVICES
+
+PiPCue is designed to interact with compatible video players and subtitle
+systems on third-party websites.
+
+PiPCue is an independent software product and is not affiliated with,
+sponsored by, endorsed by, or officially associated with Udemy, YouTube,
+LinkedIn Learning, Vimeo, Google, or any other third-party platform.
+
+All third-party product names, trademarks, service marks, and registered
+trademarks are the property of their respective owners.
+
+
+4. FUTURE THIRD-PARTY COMPONENTS
+
+If future versions of PiPCue incorporate third-party software requiring
+attribution or reproduction of license terms, the applicable notices and
+license information will be added to this file.
+
+
+PiPCue
+Developed by Alexander Hristov
+
+For licensing or product inquiries:
+ahri.devbox@gmail.com

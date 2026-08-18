@@ -1,0 +1,16 @@
+<svg width="128" height="128" xmlns="http://www.w3.org/2000/svg">
+ <defs>
+  <linearGradient y2="1.08333" x2="1.04167" y1="-0.0625" x1="-0.04167" id="g">
+   <stop stop-color="#7c3aed"/>
+   <stop stop-color="#2563eb" offset="1"/>
+  </linearGradient>
+ </defs>
+ <g>
+  <title>Layer 1</title>
+  <rect id="svg_1" fill="url(#g)" rx="23" height="96" width="96" y="16" x="16"/>
+  <rect id="svg_2" stroke-width="7" stroke="#fff" fill="none" rx="8" height="48" width="64" y="37" x="32"/>
+  <rect id="svg_3" fill="#fff" rx="4" height="20" width="30" y="58" x="58"/>
+  <path id="svg_4" stroke-linecap="round" stroke-width="7" stroke="#fff" d="m40,96l48,0"/>
+  <text transform="matrix(1.18648 0 0 1 -11.2903 0)" stroke="null" xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="7" stroke-width="0" id="svg_7" y="74.94003" x="60.54378" fill="#000000">PiPCue</text>
+ </g>
+</svg>
