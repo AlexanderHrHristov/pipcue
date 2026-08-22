@@ -17,6 +17,7 @@
   let videoHandoffPoller = null;
   let keyboardHandler = null;
   let videoHandoffInProgress = false;
+  let resumePlaybackOnRestore = false;
   let lastSubtitle = '';
   let captionHistory = [];
   let subtitleScale = 1;
@@ -280,12 +281,14 @@
       #pipcue-controls {
         position: absolute;
         left: 50%;
-        bottom: 8%;
+        bottom: 34px;
         z-index: 2147483647;
         display: flex;
         align-items: center;
         gap: 6px;
+        max-width: calc(100% - 16px);
         padding: 6px 8px;
+        white-space: nowrap;
         transform: translateX(-50%);
         border: 1px solid rgba(255, 255, 255, 0.16);
         border-radius: 999px;
@@ -294,13 +297,20 @@
         opacity: 0;
         transition: opacity 160ms ease;
       }
-      #pipcue-progress {
+
+      #pipcue-timeline {
         position: absolute;
         left: 10px;
         right: 10px;
         top: calc(100% + 5px);
-        bottom: auto;
-        width: calc(100% - 20px);
+        display: grid;
+        grid-template-columns: minmax(80px, 1fr) auto;
+        align-items: center;
+        gap: 8px;
+      }
+      #pipcue-progress {
+        width: 100%;
+        min-width: 0;
         height: 5px;
         margin: 0;
         border-radius: 999px;
@@ -315,6 +325,12 @@
         cursor: pointer;
         appearance: none;
         -webkit-appearance: none;
+      }
+      #pipcue-time {
+        min-width: max-content;
+        color: rgba(255, 255, 255, 0.88);
+        font: 600 11px/1 system-ui, sans-serif;
+        white-space: nowrap;
       }
       #pipcue-progress::-webkit-slider-runnable-track {
         height: 5px;
@@ -459,6 +475,49 @@
         color: #fff;
         background: rgba(124, 58, 237, 0.45);
       }
+      @media (max-width: 620px) {
+        #pipcue-controls {
+          gap: 3px;
+          padding: 5px 6px;
+        }
+        #pipcue-controls .pipcue-optional-control {
+          display: none;
+        }
+        #pipcue-controls button {
+          min-width: 30px;
+          padding: 0 6px;
+        }
+      }
+      @media (max-width: 380px) {
+        #pipcue-controls {
+          bottom: 32px;
+        }
+        #pipcue-controls button {
+          min-width: 27px;
+          height: 28px;
+          padding: 0 4px;
+          font-size: 11px;
+        }
+        #pipcue-timeline {
+          left: 6px;
+          right: 6px;
+          gap: 5px;
+        }
+        #pipcue-time {
+          font-size: 10px;
+        }
+      }
+      @media (max-height: 240px) {
+        #pipcue-controls {
+          bottom: 28px;
+        }
+        #pipcue-timeline {
+          top: calc(100% + 3px);
+        }
+        #${SUBTITLE_ID} {
+          bottom: 30%;
+        }
+      }
     `;
     targetDocument.head.appendChild(style);
   }
@@ -473,9 +532,35 @@
     return button;
   }
 
+
+  function formatVideoTime(seconds) {
+    if (!Number.isFinite(seconds) || seconds < 0) return '0:00';
+
+    const totalSeconds = Math.floor(seconds);
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const remainingSeconds = totalSeconds % 60;
+
+    if (hours > 0) {
+      return `${hours}:${String(minutes).padStart(2, '0')}:${String(
+        remainingSeconds
+      ).padStart(2, '0')}`;
+    }
+
+    return `${minutes}:${String(remainingSeconds).padStart(2, '0')}`;
+  }
+
+
   function createControls(video) {
     const controls = pipWindow.document.createElement('div');
     controls.id = 'pipcue-controls';
+
+    const timeline = pipWindow.document.createElement("div");
+    timeline.id = "pipcue-timeline";
+
+    const timeDisplay = pipWindow.document.createElement("span");
+    timeDisplay.id = "pipcue-time";
+    timeDisplay.textContent = "0:00 / 0:00";
 
     const progress = pipWindow.document.createElement('input');
     progress.id = 'pipcue-progress';
@@ -487,13 +572,19 @@
     progress.title = 'Video progress';
     progress.setAttribute('aria-label', 'Video progress');
 
+    timeline.append(progress, timeDisplay);
+
     const updateProgress = () => {
       const duration = Number.isFinite(video.duration) ? video.duration : 0;
-      const ratio = duration > 0 ? video.currentTime / duration : 0;
+      const currentTime = Number.isFinite(video.currentTime)
+        ? video.currentTime
+        : 0;
+      const ratio = duration > 0 ? currentTime / duration : 0;
       const value = Math.max(0, Math.min(1000, Math.round(ratio * 1000)));
       progress.value = String(value);
       progress.style.setProperty('--pipcue-progress', `${value / 10}%`);
       progress.disabled = duration <= 0;
+      timeDisplay.textContent = `${formatVideoTime(currentTime)} / ${formatVideoTime(duration)}`;
     };
 
     progress.addEventListener('input', () => {
@@ -667,9 +758,20 @@
       }
     );
 
-    const closeButton = createControl('×', 'Close Picture-in-Picture', () =>
-      pipWindow.close()
-    );
+
+    // Допълнителни контроли, които се скриват при тесен PiP прозорец
+    replayButton.classList.add("pipcue-optional-control");
+    historyButton.classList.add("pipcue-optional-control");
+    speedControl.classList.add("pipcue-optional-control");
+    smallerButton.classList.add("pipcue-optional-control");
+    largerButton.classList.add("pipcue-optional-control");
+    positionButton.classList.add("pipcue-optional-control");
+
+    const closeButton = createControl('×', 'Close Picture-in-Picture', () => {
+      resumePlaybackOnRestore =
+        Boolean(activeVideo) && !activeVideo.paused && !activeVideo.ended;
+      pipWindow.close();
+    });
 
     video.addEventListener('play', () => {
       playButton.textContent = '❚❚';
@@ -686,7 +788,7 @@
     video.addEventListener('loadedmetadata', updateProgress);
 
     controls.append(
-      progress,
+      timeline,
       backButton,
       playButton,
       forwardButton,
@@ -769,6 +871,10 @@
       const oldControls = pipWindow.document.getElementById('pipcue-controls');
       if (!player || !subtitle) return;
 
+      const previousMuted = activeVideo?.muted ?? false;
+      const previousVolume = activeVideo?.volume ?? 1;
+      const previousPlaybackRate = activeVideo?.playbackRate ?? 1;
+
       restoreVideoElement(
         activeVideo,
         originalParent,
@@ -783,7 +889,23 @@
       originalControls = replacementVideo.controls;
 
       replacementVideo.controls = false;
+      replacementVideo.volume = previousVolume;
+      replacementVideo.muted = previousMuted;
+      replacementVideo.playbackRate = previousPlaybackRate;
       player.insertBefore(replacementVideo, subtitle);
+
+      replacementVideo.play().catch((error) => {
+        console.warn(
+          'PiPCue: The next video could not start automatically.',
+          error
+        );
+      });
+
+      window.setTimeout(() => {
+        if (replacementVideo !== activeVideo) return;
+        replacementVideo.volume = previousVolume;
+        replacementVideo.muted = previousMuted;
+      }, 300);
 
       oldControls?.remove();
       player.appendChild(createControls(replacementVideo));
@@ -837,17 +959,37 @@
     stopSubtitleSync();
     stopVideoHandoffMonitor();
 
+    const videoToRestore = activeVideo;
+    const shouldResume =
+      resumePlaybackOnRestore ||
+      Boolean(
+        videoToRestore && !videoToRestore.paused && !videoToRestore.ended
+      );
+
     if (keyboardHandler && pipWindow) {
       pipWindow.removeEventListener('keydown', keyboardHandler);
     }
     keyboardHandler = null;
 
     restoreVideoElement(
-      activeVideo,
+      videoToRestore,
       originalParent,
       originalNextSibling,
       originalControls
     );
+
+    if (shouldResume && videoToRestore) {
+      window.requestAnimationFrame(() => {
+        window.requestAnimationFrame(() => {
+          videoToRestore.play().catch((error) => {
+            console.warn(
+              'PiPCue: Video could not resume after closing PiP.',
+              error
+            );
+          });
+        });
+      });
+    }
 
     pipWindow = null;
     activeVideo = null;
@@ -860,6 +1002,7 @@
     subtitleScale = 1;
     subtitlePosition = 'bottom';
     videoHandoffInProgress = false;
+    resumePlaybackOnRestore = false;
   }
 
   async function openCaptionPip() {
