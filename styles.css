@@ -1,4 +1,4 @@
-#pipcue-pip-button {
+#pipsub-pip-button {
   position: fixed;
   right: 20px;
   bottom: 20px;
@@ -16,17 +16,17 @@
   cursor: pointer;
 }
 
-#pipcue-pip-button:hover {
+#pipsub-pip-button:hover {
   background: #3e4143;
   transform: translateY(-1px);
 }
 
-#pipcue-pip-button:focus-visible {
+#pipsub-pip-button:focus-visible {
   outline: 3px solid #a435f0;
   outline-offset: 2px;
 }
 
-#pipcue-pip-status {
+#pipsub-pip-status {
   position: fixed;
   left: 50%;
   bottom: 76px;

@@ -1,10 +1,10 @@
 (() => {
   'use strict';
 
-  const BUTTON_ID = 'pipcue-pip-button';
-  const STATUS_ID = 'pipcue-pip-status';
-  const SUBTITLE_ID = 'pipcue-pip-subtitle';
-  const HISTORY_ID = 'pipcue-caption-history';
+  const BUTTON_ID = 'pipsub-pip-button';
+  const STATUS_ID = 'pipsub-pip-status';
+  const SUBTITLE_ID = 'pipsub-pip-subtitle';
+  const HISTORY_ID = 'pipsub-caption-history';
 
   let pipWindow = null;
   let activeVideo = null;
@@ -239,7 +239,7 @@
         overflow: hidden;
         background: #000;
       }
-      #pipcue-player {
+      #pipsub-player {
         position: relative;
         width: 100%;
         height: 100%;
@@ -247,7 +247,7 @@
         place-items: center;
         background: #000;
       }
-      #pipcue-player video {
+      #pipsub-player video {
         width: 100% !important;
         height: 100% !important;
         max-width: none !important;
@@ -278,7 +278,7 @@
            0 2px 4px #000;
         pointer-events: none;
       }
-      #pipcue-controls {
+      #pipsub-controls {
         position: absolute;
         left: 50%;
         bottom: 34px;
@@ -298,7 +298,7 @@
         transition: opacity 160ms ease;
       }
 
-      #pipcue-timeline {
+      #pipsub-timeline {
         position: absolute;
         left: 10px;
         right: 10px;
@@ -308,7 +308,7 @@
         align-items: center;
         gap: 8px;
       }
-      #pipcue-progress {
+      #pipsub-progress {
         width: 100%;
         min-width: 0;
         height: 5px;
@@ -318,26 +318,26 @@
         background: linear-gradient(
           to right,
           #a435f0 0%,
-          #a435f0 var(--pipcue-progress, 0%),
-          rgba(255, 255, 255, 0.35) var(--pipcue-progress, 0%),
+          #a435f0 var(--pipsub-progress, 0%),
+          rgba(255, 255, 255, 0.35) var(--pipsub-progress, 0%),
           rgba(255, 255, 255, 0.35) 100%
         );
         cursor: pointer;
         appearance: none;
         -webkit-appearance: none;
       }
-      #pipcue-time {
+      #pipsub-time {
         min-width: max-content;
         color: rgba(255, 255, 255, 0.88);
         font: 600 11px/1 system-ui, sans-serif;
         white-space: nowrap;
       }
-      #pipcue-progress::-webkit-slider-runnable-track {
+      #pipsub-progress::-webkit-slider-runnable-track {
         height: 5px;
         border-radius: 999px;
         background: transparent;
       }
-      #pipcue-progress::-webkit-slider-thumb {
+      #pipsub-progress::-webkit-slider-thumb {
         width: 14px;
         height: 14px;
         margin-top: -4.5px;
@@ -349,21 +349,21 @@
         appearance: none;
         -webkit-appearance: none;
       }
-      #pipcue-progress:active::-webkit-slider-thumb { cursor: grabbing; }
-      #pipcue-progress:focus-visible {
+      #pipsub-progress:active::-webkit-slider-thumb { cursor: grabbing; }
+      #pipsub-progress:focus-visible {
         outline: 2px solid #fff;
         outline-offset: 3px;
       }
-      #pipcue-player:hover #pipcue-controls,
-      #pipcue-controls:focus-within {
+      #pipsub-player:hover #pipsub-controls,
+      #pipsub-controls:focus-within {
         opacity: 1;
       }
-      #pipcue-speed-control {
+      #pipsub-speed-control {
         position: relative;
         display: flex;
         align-items: center;
       }
-      #pipcue-speed-panel {
+      #pipsub-speed-panel {
         position: absolute;
         left: 50%;
         bottom: calc(100% + 16px);
@@ -384,17 +384,17 @@
         transform-origin: bottom center;
         transition: opacity 160ms ease, transform 160ms ease, visibility 160ms ease;
       }
-      #pipcue-speed-panel.open {
+      #pipsub-speed-panel.open {
         opacity: 1;
         visibility: visible;
         pointer-events: auto;
         transform: translateX(-50%) translateY(0) scale(1);
       }
-      #pipcue-speed-value {
+      #pipsub-speed-value {
         color: #fff;
         font: 700 13px/1 system-ui, sans-serif;
       }
-      #pipcue-speed-knob {
+      #pipsub-speed-knob {
         position: relative;
         width: 58px !important;
         min-width: 58px !important;
@@ -404,12 +404,12 @@
         border-radius: 50% !important;
         background: radial-gradient(circle at 35% 30%, #555, #242428 48%, #111 75%) !important;
         box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.25), 0 5px 14px rgba(0, 0, 0, 0.5);
-        transform: rotate(var(--pipcue-speed-rotation, 0deg));
+        transform: rotate(var(--pipsub-speed-rotation, 0deg));
         transition: transform 100ms ease;
         touch-action: none;
         cursor: grab !important;
       }
-      #pipcue-speed-knob::after {
+      #pipsub-speed-knob::after {
         content: "";
         position: absolute;
         top: 7px;
@@ -421,11 +421,11 @@
         box-shadow: 0 0 5px rgba(164, 53, 240, 0.8);
         transform: translateX(-50%);
       }
-      #pipcue-speed-knob.dragging {
+      #pipsub-speed-knob.dragging {
         cursor: grabbing !important;
         transition: none;
       }
-      #pipcue-controls button {
+      #pipsub-controls button {
         min-width: 34px;
         height: 30px;
         padding: 0 8px;
@@ -436,10 +436,10 @@
         font: 700 12px/1 system-ui, sans-serif;
         cursor: pointer;
       }
-      #pipcue-controls button:hover {
+      #pipsub-controls button:hover {
         background: rgba(255, 255, 255, 0.18);
       }
-      #pipcue-controls button:focus-visible {
+      #pipsub-controls button:focus-visible {
         outline: 2px solid #a435f0;
         outline-offset: 1px;
       }
@@ -476,42 +476,42 @@
         background: rgba(124, 58, 237, 0.45);
       }
       @media (max-width: 620px) {
-        #pipcue-controls {
+        #pipsub-controls {
           gap: 3px;
           padding: 5px 6px;
         }
-        #pipcue-controls .pipcue-optional-control {
+        #pipsub-controls .pipsub-optional-control {
           display: none;
         }
-        #pipcue-controls button {
+        #pipsub-controls button {
           min-width: 30px;
           padding: 0 6px;
         }
       }
       @media (max-width: 380px) {
-        #pipcue-controls {
+        #pipsub-controls {
           bottom: 32px;
         }
-        #pipcue-controls button {
+        #pipsub-controls button {
           min-width: 27px;
           height: 28px;
           padding: 0 4px;
           font-size: 11px;
         }
-        #pipcue-timeline {
+        #pipsub-timeline {
           left: 6px;
           right: 6px;
           gap: 5px;
         }
-        #pipcue-time {
+        #pipsub-time {
           font-size: 10px;
         }
       }
       @media (max-height: 240px) {
-        #pipcue-controls {
+        #pipsub-controls {
           bottom: 28px;
         }
-        #pipcue-timeline {
+        #pipsub-timeline {
           top: calc(100% + 3px);
         }
         #${SUBTITLE_ID} {
@@ -553,17 +553,17 @@
 
   function createControls(video) {
     const controls = pipWindow.document.createElement('div');
-    controls.id = 'pipcue-controls';
+    controls.id = 'pipsub-controls';
 
     const timeline = pipWindow.document.createElement("div");
-    timeline.id = "pipcue-timeline";
+    timeline.id = "pipsub-timeline";
 
     const timeDisplay = pipWindow.document.createElement("span");
-    timeDisplay.id = "pipcue-time";
+    timeDisplay.id = "pipsub-time";
     timeDisplay.textContent = "0:00 / 0:00";
 
     const progress = pipWindow.document.createElement('input');
-    progress.id = 'pipcue-progress';
+    progress.id = 'pipsub-progress';
     progress.type = 'range';
     progress.min = '0';
     progress.max = '1000';
@@ -582,7 +582,7 @@
       const ratio = duration > 0 ? currentTime / duration : 0;
       const value = Math.max(0, Math.min(1000, Math.round(ratio * 1000)));
       progress.value = String(value);
-      progress.style.setProperty('--pipcue-progress', `${value / 10}%`);
+      progress.style.setProperty('--pipsub-progress', `${value / 10}%`);
       progress.disabled = duration <= 0;
       timeDisplay.textContent = `${formatVideoTime(currentTime)} / ${formatVideoTime(duration)}`;
     };
@@ -591,7 +591,7 @@
       if (!Number.isFinite(video.duration) || video.duration <= 0) return;
       video.currentTime = (Number(progress.value) / 1000) * video.duration;
       progress.style.setProperty(
-        '--pipcue-progress',
+        '--pipsub-progress',
         `${Number(progress.value) / 10}%`
       );
     });
@@ -643,16 +643,16 @@
     const speedStep = 0.1;
 
     const speedControl = pipWindow.document.createElement('div');
-    speedControl.id = 'pipcue-speed-control';
+    speedControl.id = 'pipsub-speed-control';
 
     const speedPanel = pipWindow.document.createElement('div');
-    speedPanel.id = 'pipcue-speed-panel';
+    speedPanel.id = 'pipsub-speed-panel';
 
     const speedValue = pipWindow.document.createElement('span');
-    speedValue.id = 'pipcue-speed-value';
+    speedValue.id = 'pipsub-speed-value';
 
     const speedKnob = pipWindow.document.createElement('button');
-    speedKnob.id = 'pipcue-speed-knob';
+    speedKnob.id = 'pipsub-speed-knob';
     speedKnob.type = 'button';
     speedKnob.title = 'Drag or scroll to change playback speed';
     speedKnob.setAttribute(
@@ -670,7 +670,7 @@
       const currentSpeed = Math.round(video.playbackRate * 10) / 10;
       const progressRatio = (currentSpeed - minSpeed) / (maxSpeed - minSpeed);
       const rotation = -135 + progressRatio * 270;
-      speedKnob.style.setProperty('--pipcue-speed-rotation', `${rotation}deg`);
+      speedKnob.style.setProperty('--pipsub-speed-rotation', `${rotation}deg`);
       speedValue.textContent = `${currentSpeed.toFixed(1)}×`;
       if (speedButton) speedButton.textContent = `${currentSpeed.toFixed(1)}×`;
     };
@@ -760,12 +760,12 @@
 
 
     // Допълнителни контроли, които се скриват при тесен PiP прозорец
-    replayButton.classList.add("pipcue-optional-control");
-    historyButton.classList.add("pipcue-optional-control");
-    speedControl.classList.add("pipcue-optional-control");
-    smallerButton.classList.add("pipcue-optional-control");
-    largerButton.classList.add("pipcue-optional-control");
-    positionButton.classList.add("pipcue-optional-control");
+    replayButton.classList.add("pipsub-optional-control");
+    historyButton.classList.add("pipsub-optional-control");
+    speedControl.classList.add("pipsub-optional-control");
+    smallerButton.classList.add("pipsub-optional-control");
+    largerButton.classList.add("pipsub-optional-control");
+    positionButton.classList.add("pipsub-optional-control");
 
     const closeButton = createControl('×', 'Close Picture-in-Picture', () => {
       resumePlaybackOnRestore =
@@ -866,9 +866,9 @@
     videoHandoffInProgress = true;
 
     try {
-      const player = pipWindow.document.getElementById('pipcue-player');
+      const player = pipWindow.document.getElementById('pipsub-player');
       const subtitle = pipWindow.document.getElementById(SUBTITLE_ID);
-      const oldControls = pipWindow.document.getElementById('pipcue-controls');
+      const oldControls = pipWindow.document.getElementById('pipsub-controls');
       if (!player || !subtitle) return;
 
       const previousMuted = activeVideo?.muted ?? false;
@@ -896,7 +896,7 @@
 
       replacementVideo.play().catch((error) => {
         console.warn(
-          'PiPCue: The next video could not start automatically.',
+          'pipsub: The next video could not start automatically.',
           error
         );
       });
@@ -983,7 +983,7 @@
         window.requestAnimationFrame(() => {
           videoToRestore.play().catch((error) => {
             console.warn(
-              'PiPCue: Video could not resume after closing PiP.',
+              'pipsub: Video could not resume after closing PiP.',
               error
             );
           });
@@ -1038,7 +1038,7 @@
       addPipStyles(pipWindow.document);
 
       const player = pipWindow.document.createElement('div');
-      player.id = 'pipcue-player';
+      player.id = 'pipsub-player';
 
       const subtitle = pipWindow.document.createElement('div');
       subtitle.id = SUBTITLE_ID;
@@ -1057,7 +1057,7 @@
       startSubtitleSync();
       startVideoHandoffMonitor();
     } catch (error) {
-      console.error('PiPCue:', error);
+      console.error('pipsub:', error);
       const errorName = error?.name || 'PiP error';
       const errorMessage = error?.message || 'Unknown browser error';
       const frameContext =

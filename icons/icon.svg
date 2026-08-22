@@ -11,6 +11,6 @@
   <rect id="svg_2" stroke-width="7" stroke="#fff" fill="none" rx="8" height="48" width="64" y="37" x="32"/>
   <rect id="svg_3" fill="#fff" rx="4" height="20" width="30" y="58" x="58"/>
   <path id="svg_4" stroke-linecap="round" stroke-width="7" stroke="#fff" d="m40,96l48,0"/>
-  <text transform="matrix(1.18648 0 0 1 -11.2903 0)" stroke="null" xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="7" stroke-width="0" id="svg_7" y="74.94003" x="60.54378" fill="#000000">PiPCue</text>
+  <text transform="matrix(1.18648 0 0 1 -11.2903 0)" stroke="null" xml:space="preserve" text-anchor="start" font-family="Noto Sans JP" font-size="7" stroke-width="0" id="svg_7" y="74.94003" x="60.54378" fill="#000000">PiPSub</text>
  </g>
 </svg>

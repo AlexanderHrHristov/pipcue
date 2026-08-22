@@ -1,12 +1,12 @@
-# PiPCue – Picture-in-Picture Subtitles for Udemy
+# PiPSub – Picture-in-Picture Subtitles for Udemy
 
-PiPCue is a privacy-friendly Chrome extension built primarily for Udemy learners who want synchronized subtitles inside a Picture-in-Picture window.
+PiPSub is a privacy-friendly Chrome extension built primarily for Udemy learners who want synchronized subtitles inside a Picture-in-Picture window.
 
-Udemy subtitles normally remain inside the course page and may disappear when the video is moved to Picture-in-Picture mode. PiPCue solves this problem by displaying the current subtitles directly inside its own PiP player.
+Udemy subtitles normally remain inside the course page and may disappear when the video is moved to Picture-in-Picture mode. PiPSub solves this problem by displaying the current subtitles directly inside its own PiP player.
 
-## Why PiPCue?
+## Why PiPSub?
 
-PiPCue was created to solve a real learning problem:
+PiPSub was created to solve a real learning problem:
 
 > Watching an Udemy course in Picture-in-Picture while coding or taking notes, without losing the subtitles.
 
@@ -35,7 +35,7 @@ It is especially useful for:
 
 ## Additional Website Support
 
-PiPCue is designed primarily for Udemy, but it also supports:
+PiPSub is designed primarily for Udemy, but it also supports:
 
 - YouTube
 - LinkedIn Learning
@@ -46,7 +46,7 @@ Website support may vary depending on the video player and caption implementatio
 
 ## Privacy
 
-PiPCue:
+PiPSub:
 
 - does not collect personal information;
 - does not track browsing activity;
@@ -69,7 +69,7 @@ All video and subtitle processing happens locally in the browser.
 
 ### Chrome Web Store
 
-Install PiPCue from the Chrome Web Store:
+Install PiPSub from the Chrome Web Store:
 
 **Chrome Web Store link coming soon.**
 
@@ -83,13 +83,13 @@ Install PiPCue from the Chrome Web Store:
 
 ## Project Background
 
-PiPCue started as a personal solution to a practical problem: existing Picture-in-Picture tools did not reliably display Udemy subtitles inside the floating player.
+PiPSub started as a personal solution to a practical problem: existing Picture-in-Picture tools did not reliably display Udemy subtitles inside the floating player.
 
 The project grew into a complete browser extension with custom controls, responsive layout, caption history, playback speed adjustment and automatic lecture handoff.
 
 ## Technology
 
-PiPCue is built with:
+PiPSub is built with:
 
 - JavaScript
 - HTML
@@ -101,7 +101,7 @@ PiPCue is built with:
 
 ## Disclaimer
 
-PiPCue is an independent project and is not affiliated with, endorsed by or sponsored by Udemy, YouTube, LinkedIn, Vimeo or edX.
+PiPSub is an independent project and is not affiliated with, endorsed by or sponsored by Udemy, YouTube, LinkedIn, Vimeo or edX.
 
 All trademarks belong to their respective owners.
 
